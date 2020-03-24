@@ -40,8 +40,26 @@ if (year== 2016) days=366 else  days=365
 #derive day_file_num_flag
 dayID<-c(1:days)
 dayID_start<-dayID
+dayID_start[]<-NA
 dayID_end<-dayID
+dayID_end[]<-NA
 
 day_file_num_flag<-data.frame(dayID,dayID_start,dayID_end)
 
+#Jan 31 days
+for (n in 1:31) {
+  day_num<-file_num[MMDDHH>=(10000+100*n) &MMDDHH<(10100+100*n)]
+  if (day_num >=1){
+    day_file_num_flag$dayID_start[n]<-day_num[1]
+    day_file_num_flag$dayID_end[n]<-day_num[length(day_num)]   
+  }
+}
+#Feb 28 days
+for (n in 1:28) {
+  day_num<-file_num[MMDDHH>=(20000+100*n) &MMDDHH<(20100+100*n)]
+  if (day_num >=1){
+    day_file_num_flag$dayID_start[31+n]<-day_num[1]
+    day_file_num_flag$dayID_end[31+n]<-day_num[length(day_num)]   
+  }
+}
 
