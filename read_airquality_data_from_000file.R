@@ -62,6 +62,7 @@ for (m in 1:12) {
     floor_file<-m*10000+100*n
     ceiling_file<-m*10000+100*(n+1)
     day_num<-file_num[MMDDHH>=(floor_file) &MMDDHH<(ceiling_file)]
+    if (length(day_num) == 0) next
     if (day_num >=1){
       flag=n
       if (m==1) flag=n
